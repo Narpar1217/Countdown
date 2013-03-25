@@ -1,3 +1,5 @@
+from sys import stderr
+
 ################################################################################
 class Player(object):
     """Defines a generic player for a game. Includes attributes for name and score."""
@@ -37,5 +39,5 @@ class Player(object):
 
                 self._score = n
             except (ValueError, TypeError):
-                print 'ERROR: Attempted to set score with invalid data. Defaulting to 0. Bad value: ', str(value)
+                print >>stderr, 'ERROR: Attempted to set score with invalid data. Defaulting to 0. Bad value: ', str(value)
                 self._score = 0
