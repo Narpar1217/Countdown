@@ -3,7 +3,7 @@ COUNTDOWN! Networked shell edition.
 Written by Adam Beagle
 
 
-sETUP:
+SETUP:
 All included files, excluding CountdownClient.py, must be on the host machine.
 CountdownClient.py is the only file needed on the client machine (assuming Python is installed).
 
