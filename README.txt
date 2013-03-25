@@ -6,6 +6,7 @@ This edition can only be played on 2 different machines via network.
 Earlier versions that were playable on a single machine are not currently available on Github.
 
 SETUP:
+Only verified to work with Python 2.7.3, though I don't know of anything that would break compatibility in 3.x.
 All included files, excluding CountdownClient.py, must be on the host machine.
 CountdownClient.py is the only file needed on the client machine (assuming Python is installed).
 
