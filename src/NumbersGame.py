@@ -1,8 +1,30 @@
+"""
+NumbersGame.py
+
+Based on one of the games played in the game show Countdown. 
+
+General Description:
+Two piles of numbers, for large and small, exist (defined in more detail below).
+A player chooses how many numbers he/she wants out of each of these piles, for a total of 6 numbers.
+Those numbers of values are then randomly chosen from the piles, and become the set of manipulatable
+values for the round.
+Finally, a 3-digit target integer is randomly generated.
+The players must use basic arithmetic on the set of numbers, using any subset of numbers in the set,
+to get as close to possible to the target.
+Scores are then given based on how close each player gets. 
+Solutions within 10 of the target score points, increasing in value the closer the solution (see GetScore).
+"""
+
 from random import randint, choice
 import sys
 import re
 
+###############################################################################
 class NumbersGame(object):
+    """Defines a Countdown-style Numbers Game.
+    Includes capability to randomly generate target and 
+    manipulatable numbers, and check player solutions
+    against those values."""
 
     #**********************************************************
     #---------------------- CONSTRUCTOR ----------------------*
@@ -56,7 +78,7 @@ class NumbersGame(object):
         except NameError as e:
             diff = 'Error of {0} occured when parsing solution.\nLikely cause: Character(s) aside from digits, parens, or math operators included.'.format(type(e))
         except:
-            print "Unexpected error:", sys.exc_info()[0]
+            print >>sys.stderr, "Unexpected error:", sys.exc_info()[0]
             raise
         else:
             inRnd, msg = self._check_soltn_nums_valid(sltn)
@@ -147,7 +169,7 @@ class NumbersGame(object):
         try:
             numLarge = int(numLarge)
         except ValueError:
-            print 'ERROR: Passed value for numLarge must be numeric. Defaulting to 0.'
+            print >>sys.stderr, 'ERROR: Passed value for numLarge must be numeric. Defaulting to 0.'
             numLarge = 0
         
         if numLarge > 4:
@@ -186,6 +208,7 @@ class NumbersGame(object):
 
 #################################################################################################
 if __name__ == '__main__':
+    #test data, normally this class would be instantiated and used elsewhere.
     g = NumbersGame()
     g.NewRound(2)
     print g.Numbers, g.Target
