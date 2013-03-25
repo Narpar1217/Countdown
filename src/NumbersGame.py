@@ -138,7 +138,7 @@ class NumbersGame(object):
         try:
             sltn = str(sltn).lower()
         except:
-            return sltn, 'ERROR: Problem with passed solution. Cannot be converted to string.\n' + str(sys.exc_info()[0])
+            return sltn, 'ERROR: Problem with passed solution. Cannot be converted to string for evaluation.\n' + sys.exc_info()[0]
         else:
             sltn = sltn.replace('x', '*')
             sltn = sltn.replace('\\', '/')
