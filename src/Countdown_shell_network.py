@@ -4,6 +4,7 @@ Countdown_shell_network.py - Contains Main for Networked Countdown game played i
 ToDo:
   * 3/24 Entire game hasn't been looked at in a while; Needs a once-over for ToDos
   * Test the scope of general network play, rather than just LAN
+  * Restore UNIX compatibility
   * Possible general cleanup and refactoring of this file? This is much larger than I prefer files to be.
      Much of the length is inherent in creating/parsing text for the shell, so there may not be much cleanup possible,
      but I do feel a lot of this file in particular continues to look hacked together.
