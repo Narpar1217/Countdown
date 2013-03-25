@@ -2,6 +2,8 @@ COUNTDOWN! Networked shell edition.
 ---------------------------------------
 Written by Adam Beagle
 
+This edition can only be played on 2 different machines via network. 
+Earlier versions that were playable on a single machine are not currently available on Github.
 
 SETUP:
 All included files, excluding CountdownClient.py, must be on the host machine.
