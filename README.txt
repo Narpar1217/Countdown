@@ -17,15 +17,16 @@ To Play:
 		python Countdown_shell_network.py /t ###
 	Where ## is the round time (as an integer) you would like. This can be any number 3 digits or fewer.
 
-	Otherwise, you can just run Countdown_shell_network.py to use the default round time.
+	Otherwise, Countdown_shell_network.py can be run with no arguments to use the default round time.
 
 	Please note that running in anything but a Windows shell (e.g. in a Python IDE) results in some text formatting problems.
   
+
   CLIENT:
-	Must specify host on command line. Usage is:
+	Must specify host IP on command line. Port is optional. Usage is:
 		python CountdownClient.py /h host_ip:port
 		
-		Example: python CountClient.py /h 192.168.0.1:23455
+		Example: python CountdownClient.py /h 192.168.0.1:23455
 	
-	If host's IP is not specified at all, the program cannot be run.
+	If host's IP is not specified at all, the program will not run.
 	If port is not specified, the program will default to port 1060 (this is also the default in the server program).
