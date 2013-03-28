@@ -15,6 +15,7 @@ of source code from this file.
 """
 
 import socket
+import re
 from sys import argv, exit, stderr, stdout
 from time import sleep
 
@@ -125,68 +126,70 @@ class CountdownClient(object):
             stdout.write('  \r')
 
 ##############################################################################
-def check_ip(ip):
-    valid = True
+def parse_ip_str(ip):
+    """
+    Validates a passed IPV4 address string of form "ip[:port]".
+    Returns tuple of host and port as strings, or None if invalid
+    or not passed (for port only).
+    """
+    ipRE = '\d{1,3}(\.\d{1,3}){3}(:\d+)?'
+    match = re.match(ipRE, ip)
 
-    ip = ip.split(':')
+    if match:
+        ip = match.group().split(':')
 
-    if len(ip) == 2:
-        ip, port = ip
-    elif not len(ip) == 1:
-        valid = False
+        if len(ip) == 2:
+            ip, port = ip
+        else:
+            ip = ip[0]
+            port = None
     else:
-        ip = ip[0]
-        port = None
+        ip = port = None
 
-    if ip.count('.') == 3 and valid:
-        try:
-            for n in ip.split('.'):
-                    if not 0 <= int(n) <= 255:
-                        valid = False
-                        break
-            if port:
-                port = int(port)
-        except (ValueError, TypeError):
-            valid = False
+    if ip and not validate_ip_bytes(ip):
+        ip = port = None
 
-    else:
-        valid = False
+    return (ip, port)
 
-    return valid
 
 #---------------------------------------------------
-def parse_argv(args):
-    host = None
+def parse_argv(args, defaultPort):
+    ip = None
     port = None
     
     if '/h' in args:
         try:
             host = args[args.index('/h') + 1]
-            if not check_ip(host):
-                exit('Invalid IP entered.')
+            ip, port = parse_ip_str(host)
 
-            host = host.split(':')
-            if len(host) == 2:
-                host, port = host
-            elif not len(host) == 1:
-                exit('Invalid IP/port entered.')
-            else:
-                host = host[0]
+            if not ip:
+                exit('Invalid IP address entered.')
             
         except IndexError:
-            host = None
+            exit('Usage: python CountdownClient.py /h ip[:port]')
 
     if not port:
-        port = 1060 #FIXME?: hardcoded default port
+        port = defaultPort
 
-    return host, port
+    return ip, port
+
+
+#---------------------------------------------------
+def validate_ip_bytes(ip):
+    """
+    Returns true if all byte values in an IPV4 address string
+    are valid, i.e. are between 0 and 255 inclusive.
+    """
+    ip = ip.split('.')
+
+    return bool(not [x for x in ip if not 0 <= int(x) <= 255])
             
 ################################################################################            
 if __name__ == '__main__':
-    host, port = parse_argv(argv)
+    host, port = parse_argv(argv, 1060)
     if not host:
         print >>stderr, 'No host entered. Usage: python CountdownClient.py /h ip:port'
         raw_input()
     else:
-        c = CountdownClient(host, port)
+        c = CountdownClient(host, int(port))
         c.Start()

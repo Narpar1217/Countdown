@@ -200,7 +200,7 @@ def check_player_expr(player, game, server):
     return diff
 
 #---------------------------------------------------------------------------------------
-def determine_result_numbers(diffs, players, game):
+def determine_result_numbers(diffs, players, game, server):
     absDiffs = [abs(x) for x in diffs]
     low = min(absDiffs)
     score = game.GetScore(low)
@@ -266,7 +266,7 @@ def do_numbers_round(game, players, roundTime, server):
             
     print_to_all('', server)
     game.NewRound(numLarge)
-    print_box_containers(game.Numbers)
+    print_box_containers(game.Numbers, server)
     print_to_all('\n  TARGET: ' + str(game.Target) + '\n', server)
 
     print_to_all__input('Press enter to start clock! You will have %d seconds.\n' % roundTime, server, serverPlayer)
@@ -279,7 +279,7 @@ def do_numbers_round(game, players, roundTime, server):
 
     print ''
     sleep(1)
-    determine_result_numbers(diffs, players, game)
+    determine_result_numbers(diffs, players, game, server)
     sleep(1.5)
     
 
@@ -336,34 +336,6 @@ def get_rand_player(players):
 #---------------------------------------------------------------------------
 def get_server_player(players):
     return [x for x in players if x.PType == 'server'][0]
-
-###-------------------------------------------------------------------------
-##def parse_argv_unix(argv):
-##    fname = argv[0]
-##    argv = argv[1:]
-##    playerNames = []
-##    roundTime = None
-##    
-##    try:
-##        opts, args = getopt.getopt(argv, 'hp:t:', ['players=', 'roundtime='])
-##    except getopt.GetoptError:
-##        print '{0} -p <players> -t <round_time>'.format(fname)
-##        sys.exit(2)
-##
-##    for opt, arg in opts:
-##        if opt == '-h':
-##            print '{0} -p <players> -t <round_time>'.format(fname)
-##            sys.exit()
-##        elif opt in ('p', '--players'):
-##            playerNames = arg
-##        elif opt in ('t', '--roundtime'):
-##            try:
-##                roundTime = int(arg)
-##            except ValueError:
-##                print 'WARNING: Invalid value for roundtime. Using default.'
-##                roundTime = None
-##
-##    return roundTime, playerNames
 
 #-------------------------------------------------------------------------
 def parse_argv_win(argv, defaultTime):
