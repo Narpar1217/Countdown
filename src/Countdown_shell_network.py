@@ -8,6 +8,15 @@ ToDo:
   * Possible general cleanup and refactoring of this file? This is much larger than I prefer files to be.
      Much of the length is inherent in creating/parsing text for the shell, so there may not be much cleanup possible,
      but I do feel a lot of this file in particular continues to look hacked together.
+
+
+Copyright (C) 2013 Adam Beagle - All Rights Reserved
+You may use, distribute, and modify this code under
+the terms of the GNU General Public License,
+viewable at http://opensource.org/licenses/GPL-3.0
+
+This copyright notice must be retained with any use
+of source code from this file.
 """
 
 import sys, getopt, platform

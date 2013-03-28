@@ -1,3 +1,13 @@
+"""
+Copyright (C) 2013 Adam Beagle - All Rights Reserved
+You may use, distribute, and modify this code under
+the terms of the GNU General Public License,
+viewable at http://opensource.org/licenses/GPL-3.0
+
+This copyright notice must be retained with any use
+of source code from this file.
+"""
+
 from LettersGame import LettersGame
 from NumbersGame import NumbersGame
 from CountdownPlayer import CountdownPlayer

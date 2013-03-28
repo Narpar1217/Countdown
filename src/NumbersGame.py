@@ -4,15 +4,24 @@ NumbersGame.py
 Based on one of the games played in the game show Countdown. 
 
 General Description:
-Two piles of numbers, for large and small, exist (defined in more detail below).
-A player chooses how many numbers he/she wants out of each of these piles, for a total of 6 numbers.
-Those numbers of values are then randomly chosen from the piles, and become the set of manipulatable
-values for the round.
-Finally, a 3-digit target integer is randomly generated.
-The players must use basic arithmetic on the set of numbers, using any subset of numbers in the set,
-to get as close to possible to the target.
-Scores are then given based on how close each player gets. 
-Solutions within 10 of the target score points, increasing in value the closer the solution (see GetScore).
+    Two piles of numbers, for large and small, exist (defined in more detail below).
+    A player chooses how many numbers he/she wants out of each of these piles, for a total of 6 numbers.
+    Those numbers of values are then randomly chosen from the piles, and become the set of manipulatable
+    values for the round.
+    Finally, a 3-digit target integer is randomly generated.
+    The players must use basic arithmetic on the set of numbers, using any subset of numbers in the set,
+    to get as close to possible to the target.
+    Scores are then given based on how close each player gets. 
+    Solutions within 10 of the target score points, increasing in value the closer the solution (see GetScore).
+
+
+Copyright (C) 2013 Adam Beagle - All Rights Reserved
+You may use, distribute, and modify this code under
+the terms of the GNU General Public License,
+viewable at http://opensource.org/licenses/GPL-3.0
+
+This copyright notice must be retained with any use
+of source code from this file.
 """
 
 from random import randint, choice

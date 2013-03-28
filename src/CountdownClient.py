@@ -3,6 +3,15 @@ CountdownClient.py - Runs an instance of a Countdown client program.
 
 ToDo:
   *An abstracted class for a more generic Client object could be very useful to other projects.
+
+
+Copyright (C) 2013 Adam Beagle - All Rights Reserved
+You may use, distribute, and modify this code under
+the terms of the GNU General Public License,
+viewable at http://opensource.org/licenses/GPL-3.0
+
+This copyright notice must be retained with any use
+of source code from this file.
 """
 
 import socket
@@ -125,15 +134,18 @@ def check_ip(ip):
         ip, port = ip
     elif not len(ip) == 1:
         valid = False
-        
+    else:
+        ip = ip[0]
+        port = None
+
     if ip.count('.') == 3 and valid:
         try:
             for n in ip.split('.'):
                     if not 0 <= int(n) <= 255:
                         valid = False
                         break
-
-            port = int(port)
+            if port:
+                port = int(port)
         except (ValueError, TypeError):
             valid = False
 
@@ -156,7 +168,7 @@ def parse_argv(args):
             host = host.split(':')
             if len(host) == 2:
                 host, port = host
-            elif not len(host == 1):
+            elif not len(host) == 1:
                 exit('Invalid IP/port entered.')
             else:
                 host = host[0]
