@@ -179,10 +179,15 @@ def validate_ip_bytes(ip):
     """
     Returns true if all byte values in an IPV4 address string
     are valid, i.e. are between 0 and 255 inclusive.
+    Returns False otherwise.
+    Assumes ip is properly formatted.
     """
-    ip = ip.split('.')
+    try:
+        valid = not [x for x in ip.split('.') if not 0 <= int(x) <= 255]
+    except:
+        valid = False
 
-    return bool(not [x for x in ip if not 0 <= int(x) <= 255])
+    return valid
             
 ################################################################################            
 if __name__ == '__main__':
