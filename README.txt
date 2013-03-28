@@ -1,29 +1,45 @@
-COUNTDOWN! Networked shell edition.
----------------------------------------
+###################################################################
+                             COUNTDOWN! 
+                      Networked shell edition
+
+ "It's more or less like regular Countdown, but played in a shell"
+###################################################################
 Written by Adam Beagle
 
-This edition can only be played on 2 different machines via network. 
-Earlier versions that were playable on a single machine are not currently available on Github.
+********************
+* ~ GENERAL INFO ~ *
+********************
 
-SETUP:
-Only verified to work with Python 2.7.3, though I don't know of anything that would break compatibility in 3.x.
+A game similar to the game show Countdown that is played in a shell. 
+Two players can play over LAN.
+
+
+*******************
+* ~~~~ SETUP ~~~~ *
+*******************
+
+Python is required to play. The game is only verified to work with Python 2.7.3, but I don't know of anything that would break compatibility in 3.x.
 All included files, excluding CountdownClient.py, must be on the host machine.
 CountdownClient.py is the only file needed on the client machine (assuming Python is installed).
 
 
-To Play:
+********************
+* ~~ HOW TO USE ~~ *
+********************
+
   HOST: 
-	If you'd like to specify a round time, this can be done via command line arguments like so:
+	Start the game by running Countdown_shell_network.py.
+	Running with no arguments will use the default round time of 30 seconds.
+
+	If you'd like to specify a round time, this can be done via a command line argument like so:
 		python Countdown_shell_network.py /t ###
-	Where ## is the round time (as an integer) you would like. This can be any number 3 digits or fewer.
-
-	Otherwise, Countdown_shell_network.py can be run with no arguments to use the default round time.
-
-	Please note that running in anything but a Windows shell (e.g. in a Python IDE) results in some text formatting problems.
+	Where ### is the round time in seconds to use. This can be any integer 3 digits or fewer.
   
 
   CLIENT:
-	Must specify host IP on command line. Port is optional. Usage is:
+	
+	Start the game by running CountdownClient.py.
+	The host's IP address must be specified. Port is optional. Usage is:
 		python CountdownClient.py /h host_ip:port
 		
 		Example: python CountdownClient.py /h 192.168.0.1:23455
