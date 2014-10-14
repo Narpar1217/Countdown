@@ -6,6 +6,13 @@
 ###################################################################
 Written by Adam Beagle
 
+*******************
+* ~~~ WARNING ~~~ *
+*******************
+
+This repository is a mess (in regard to PEP8 and so much more) and not indicative in any way of my current ability.
+-Adam 10/2014
+
 ********************
 * ~ GENERAL INFO ~ *
 ********************
