@@ -3,7 +3,7 @@ from os.path import isfile
 
 import pytest
 
-from countdown.game.lettersgame import InitError, WordList
+from countdown.game.lettersround import InitError, WordList
 from countdown.game.resmaps import WORDLIST_PATH
 
 def test_wordlist_file_exists():
@@ -34,18 +34,12 @@ def test_wordlist():
         assert not wlist.search('some word')
         
     wlist = WordList()
-
-    # Before init called for the first time, attempting to search should raise
-    # InitError.
-    with pytest.raises(InitError):
-            wlist.search('word')
     do_tests(wlist)
 
     # Use of an instance or the class itself should have identical functionality
-    # Also, the list should already be initialized.
     wlist = WordList
     do_tests(wlist)
 
     # Verify that initialization remains despite new instance.
     wlist = WordList()
-    do_tests(wlist)
+    assert wlist.search('some')
