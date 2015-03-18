@@ -20,6 +20,17 @@ class InitError(Exception):
     pass
 
 class WordList:
+    """
+    Defines an object that faciliates dictionary (as in Webster's) lookups.
+    Uses frozenset for O(1) lookups.
+
+    Init expects a path to a file containing words separated by a single space
+    and no newlines. The dictionary is built from all words in said file.
+
+    METHODS:
+      init   - Must call this before first use.
+      search - Search for a word.
+    """
     wordlist = None
 
     @classmethod
@@ -27,6 +38,10 @@ class WordList:
         """
         Initialize the wordlist. Must be called before first use.
         Safe to call more than once (successive calls have no effect).
+
+        'path' is assumed to point to a file containing words separated by a
+        single space and no newlines. The dictionary is built from all words
+        in said file.
         """
         if cls.wordlist is None:
             cls.wordlist = cls._build_from_file(path)
@@ -53,3 +68,4 @@ class WordList:
             )
 
         return wordlist
+
