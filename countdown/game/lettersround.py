@@ -4,7 +4,7 @@ Author: Adam Beagle
 """
 from random import randrange
 
-from .resmaps import LETTER_FREQUENCY_PATH, WORDLIST_PATH
+from countdown.resmaps import LETTER_FREQUENCY_PATH, WORDLIST_PATH
 
 def build_letter_frequency(path):
     """
@@ -87,14 +87,15 @@ class WordList:
 
 class LettersRound:
     """
-    All public methods return (success code, message) where `success code`
-    is a boolean representing general success or failure of a given operation,
-    and `message` provides more information to the user, if applicable (message
-    can be empty).
+    All public methods except for score_word() return (success code, message) where 
+    `success code` is a boolean representing general success or failure of a given 
+    operation, and `message` provides more information to the user, if applicable 
+    (message can be empty).
     
     METHODS:
       add_consonant
       add_vowel
+      score_word
       verify_word
     """
     wordlist = WordList()
@@ -135,9 +136,23 @@ class LettersRound:
         return False, 'Minimum {} consonants required'.format(
             self.min_consonants
         )
+        
+    def score_word(self, word):
+        """
+        Return score for `word.` 
+        This method assumes word is valid. Call verify_word() first to check.
+        """
+        lenword = len(word)
+        if lenword < self.max_letters:
+            return lenword
+        elif lenword == self.max_letters:
+            return 2*lenword
+        else:
+            return 0
     
     def verify_word(self, word):
         word = word.upper()
+        print(word)
         remaining = self.showing[:]
 
         # Verify word can be made from available letters
