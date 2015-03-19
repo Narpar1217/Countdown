@@ -1,4 +1,4 @@
-from countdown.game.player import Player
+from countdown.player import Player
 
 def test_name():
     p = Player('Mickey')

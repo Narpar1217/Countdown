@@ -1,6 +1,6 @@
 import pytest
 
-from countdown.game.lettersround import LettersRound, LettersRoundError
+from countdown.lettersround import LettersRound, LettersRoundError
 
 @pytest.fixture
 def consonants():

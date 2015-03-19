@@ -3,8 +3,8 @@ from os.path import isfile
 
 import pytest
 
-from countdown.game.lettersround import InitError, WordList
-from countdown.game.resmaps import WORDLIST_PATH
+from countdown.lettersround import InitError, WordList
+from countdown.resmaps import WORDLIST_PATH
 
 def test_wordlist_file_exists():
     assert isfile(WORDLIST_PATH)
