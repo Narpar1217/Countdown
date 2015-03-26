@@ -160,13 +160,19 @@ class LettersRound:
             if letter in remaining:
                 remaining.remove(letter)
             else:
-                return False, 'Sorry, word cannot be made from given letters.'
+                return (
+                    False, 
+                    "Sorry, '{}' cannot be made from given letters.".format(word)
+                )
 
         # Verify word in dictionary
         if self.wordlist.search(word):
             return True, "Word is valid!"
         else:
-            return False, "Sorry, your word was not found in the dictionary."
+            return (
+                False, 
+                "Sorry, '{}' was not found in the dictionary.".format(word)
+            )
 
     def _add_to_showing(self, letter):
         if self.showing_full:

@@ -20,6 +20,7 @@ class LettersRoundGame:
         quit = self._write_intro()
       
         if quit:
+            print('\nThanks for playing!')
             return
 
         while True:
@@ -70,20 +71,17 @@ class LettersRoundGame:
                 print(msg)
             
     def _write_instructions(self):
-        print('\nDESCRIPTION:')
-        print(
-            'This game is a stripped-down, web-only version of my game',
-            '"Countdown." It was made as a hobbyist project.',
-            'For more information, see http://adambeagle.com/projects'
-        )
-        
         print('\nINSTRUCTIONS:')
         print(
-            'Choose consonant or vowel until there are 9 showing letters.',
+            'After starting the game, choose consonant or vowel to put a', 
+            'new random letter on the board.',
+            'This process is repeated until there are 9 showing letters.',
             'Then, you will have',
             str(self.round_time),
             'seconds to come up with the longest single word you can,',
-            'using each letter only as many times as it appears.\n'
+            'using each letter only as many times as it appears.',
+            'The validity of words is determined using a Scrabble-like',
+            'dictionary.\n'
         )
         
     def _write_intro(self):
