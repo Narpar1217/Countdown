@@ -1,3 +1,4 @@
+from datetime import datetime, timedelta
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from io import StringIO
 from random import choice
@@ -30,10 +31,23 @@ class GameThread:
         self.output_buffer = []
         
         return ret
+        
+    def kill(self):
+        self.input_buffer = ['']
+        self.output_buffer = ['\nERROR: Time expired. Quitting...\n']
+        
+        sleep(1)
+        if self.thread.is_alive():
+            sys.stderr.write('ERROR: kill() did not successfully end game.\n')
 
-class CustomIO(StringIO):
+class CustomIO(StringIO): 
+    timeout_secs = 120
+    
     def write(self, s):
         tname = current_thread().name
+        if tname == 'MainThread':
+            return 0
+            
         thread = THREADS[tname]
         
         thread.wait = True
@@ -44,14 +58,22 @@ class CustomIO(StringIO):
         return len(s)
 
     def readline(self, size=-1):
+        start = datetime.now()
+        timeout = start + timedelta(seconds=self.timeout_secs)
         tname = current_thread().name
         thread = THREADS[tname]
         thread.wait = False
         
         while not thread.input_buffer and thread.thread.is_alive():
+            if datetime.now() > timeout:
+                #thread.kill()
+                thread.output_buffer = ['\nERROR: Time expired. Quitting...\n']
+                del THREADS[tname]
+                return ''
             sleep(0.5)
             
         if not thread.thread.is_alive():
+            sys.stderr.write('Thread {} deleted.\n'.format(thread.thread.name))
             del THREADS[tname]
             
         return thread.input_buffer.pop()
@@ -68,6 +90,7 @@ class Handler(BaseHTTPRequestHandler):
             key = random_key(16)
 
         thread.name = key
+        thread.daemon = True
         THREADS[key] = GameThread(thread)
         thread.start()
 
@@ -86,7 +109,13 @@ class Handler(BaseHTTPRequestHandler):
         assert split[0].startswith('key=')
         key = split[0][4:]
 
-        thread = THREADS[key]
+        try:
+            thread = THREADS[key]
+        except KeyError:
+            # Thread timed out or otherwise has ended
+            self.wfile.write('\nERROR: Game has ended (probably timed out).\n{}\n'.format(END).encode())
+            return
+            
         thread.wait = True
         thread.input_buffer.append('\n'.join(split[1:]))
         self.write_game_output(key)
